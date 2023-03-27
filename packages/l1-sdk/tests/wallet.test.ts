@@ -71,6 +71,12 @@ describe('Wallet with mock provider', function () {
       await wallet.isBEP20DepositsApproved(address);
     });
 
+    it('isERC721DepositsApprovedForAll', async function () {
+      this.timeout(10000);
+      const address = wallet.provider.contractAddress.defaultNftFactoryContract;
+      await wallet.isERC721DepositsApprovedForAll(address);
+    });
+
     it('depositBNB', async function () {
       this.timeout(60 * 1000);
       const tokenAddress = await wallet.resolveTokenAddress(0);

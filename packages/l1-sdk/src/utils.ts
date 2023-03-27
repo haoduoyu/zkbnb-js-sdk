@@ -4,9 +4,9 @@ import { Address, TokenAddress, TokenLike, TokenRatio, WeiRatio } from './types'
 import { BEP20Interface, ZkBNBInterface } from './abi';
 
 // Max number of tokens for the current version, it is determined by the zkBNB circuit implementation.
-const MAX_NUMBER_OF_TOKENS = Math.pow(2, 31);
+// const MAX_NUMBER_OF_TOKENS = Math.pow(2, 31);
 // Max number of accounts for the current version, it is determined by the zkBNB circuit implementation.
-const MAX_NUMBER_OF_ACCOUNTS = Math.pow(2, 24);
+// const MAX_NUMBER_OF_ACCOUNTS = Math.pow(2, 24);
 
 export const MAX_TIMESTAMP = 4294967295;
 export const MIN_NFT_TOKEN_ID = 65536;

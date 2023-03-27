@@ -1,5 +1,5 @@
 import { BigNumber, BigNumberish, Contract, ContractTransaction, ethers } from 'ethers';
-import { ErrorCode as EthersErrorCode } from '@ethersproject/logger';
+import { ErrorCode, ErrorCode as EthersErrorCode } from '@ethersproject/logger';
 import { EthMessageSigner } from './eth-message-signer';
 import { ZkBNBProvider } from './provider-interface';
 import { Address, TokenAddress, l1ChainId } from './types';
@@ -502,7 +502,7 @@ export abstract class AbstractWallet {
     }
   }
 
-  protected modifyEthersError(error: any): never {
+  protected modifyEthersError(error: { code: ErrorCode; message: string }): never {
     if (this.ethSigner instanceof ethers.providers.JsonRpcSigner) {
       // List of errors that can be caused by user's actions, which have to be forwarded as-is.
       const correctErrors = [

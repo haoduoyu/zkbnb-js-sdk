@@ -4,11 +4,14 @@ import { BigNumber, Contract, ethers } from 'ethers';
 import { ETHOperation, Wallet } from '../src/wallet';
 import { Provider } from '../src/provider';
 import { BEP20Interface } from '../src/abi';
+import { BytesLike } from '@ethersproject/bytes';
+import { ExternallyOwnedAccount } from '@ethersproject/abstract-signer';
+import { SigningKey } from '@ethersproject/signing-key';
 
 describe('Wallet with mock provider', function () {
   const ZERO_ADDRESS = ethers.constants.AddressZero;
 
-  async function getWallet(ethPrivateKey: any): Promise<Wallet> {
+  async function getWallet(ethPrivateKey: BytesLike | ExternallyOwnedAccount | SigningKey): Promise<Wallet> {
     const ethWallet = new ethers.Wallet(
       ethPrivateKey,
       new ethers.providers.JsonRpcProvider(process.env.BSC_TESTNET_RPC || '')
@@ -96,7 +99,7 @@ describe('Wallet with mock provider', function () {
       this.timeout(60 * 1000);
       const tokenAddress = await wallet.resolveTokenAddress(1);
       // transfer asset from governor to this test wallet
-      const governorWallet = await getWallet(process.env.ZKBNB_GOVERNOR_PRIVATE_KEY);
+      const governorWallet = await getWallet(process.env.ZKBNB_GOVERNOR_PRIVATE_KEY || '');
       const erc20contract = new Contract(tokenAddress, BEP20Interface, governorWallet.ethSigner());
       const amount = ethers.utils.parseEther('0.001');
       const transferResult = await erc20contract.transfer(wallet.address(), amount);

@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     'no-async-promise-executor': 0,
     '@typescript-eslint/no-var-requires': 0,
+    "@typescript-eslint/no-explicit-any": "off",
   },
   globals: {
     Go: true,
